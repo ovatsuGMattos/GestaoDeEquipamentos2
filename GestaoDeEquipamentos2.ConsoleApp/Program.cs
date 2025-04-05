@@ -1,8 +1,4 @@
-﻿using Microsoft.Win32;
-using System.Runtime.Intrinsics.X86;
-using System;
-
-namespace GestaoDeEquipamentos2.ConsoleApp
+﻿namespace GestaoDeEquipamentos2.ConsoleApp
 {
     internal class Program
     {
@@ -10,8 +6,6 @@ namespace GestaoDeEquipamentos2.ConsoleApp
         {
             //2. Controle de Chamados
 
-            //Requisito 2.1: Como funcionário Junior quer ter a possibilidade de registrar os chamados de manutenções que são efetuadas nos equipamentos registrados
-            
             //• Deve ter o título do chamado;
             //• Deve ter a descrição do chamado;
             //• Deve ter um equipamento;
@@ -25,7 +19,45 @@ namespace GestaoDeEquipamentos2.ConsoleApp
 
             //Requisito 2.3: Como funcionário Junior quer ter a possibilidade de editar um chamado que esteja registrado, sendo que ele possa editar todos os campos.
             //Requisito 2.4: Como funcionário Junior quer ter a possibilidade de excluir um chamado.
+            static void Main(string[] args)
+            {
+                Chamado Chamado = new Chamado();
 
+                bool opcaoSairEscolhida = false;
+
+                while (!opcaoSairEscolhida)
+                {
+                    char opcaoPrincipalEscolhida = Menu.ApresentarMenuPrincipal();
+                    char operacaoEscolhida;
+
+                    switch (opcaoPrincipalEscolhida)
+                    {
+                        case '1':
+                            operacaoEscolhida = telaEquipamento.ApresentarMenu();
+
+                            if (operacaoEscolhida == 'S' || operacaoEscolhida == 's')
+                                break;
+
+                            if (operacaoEscolhida == '1')
+                                Chamado.CadastrarChamado();
+
+                            else if (operacaoEscolhida == '2')
+                                telaEquipamento.EditarEquipamento();
+
+                            else if (operacaoEscolhida == '3')
+                                telaEquipamento.ExcluirEquipamento();
+
+                            else if (operacaoEscolhida == '4')
+                                telaEquipamento.VisualizarEquipamentos(true);
+
+                            break;
+
+                        default: opcaoSairEscolhida = true; break;
+                    }
+                }
+
+                Console.ReadLine();
+            }
 
 
 
