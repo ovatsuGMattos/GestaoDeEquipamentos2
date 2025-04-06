@@ -2,6 +2,11 @@
 
 ![](https://i.imgur.com/DgsSxD1.gif)
 
+````
+	💻	PROJETO DESENVOLVIDO DURANTE ACADEMIA DO PROGRAMADOR 2025 💻
+````
+
+
 Este é um sistema de gerenciamento de chamados de manutenção. Ele permite o cadastro, edição, exclusão e visualização de chamados relacionados a equipamentos registrados.
 
 ## Objetivo
