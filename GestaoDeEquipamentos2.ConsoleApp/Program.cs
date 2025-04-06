@@ -32,7 +32,7 @@
                             break;
                     }
 
-                    Console.WriteLine("\nPressione qualquer tecla para continuar...");
+                    Console.WriteLine("Pressione qualquer tecla para continuar...");
                     Console.ReadKey();
 
                 }

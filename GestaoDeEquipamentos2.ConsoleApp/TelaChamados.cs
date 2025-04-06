@@ -48,7 +48,6 @@
 
             Notificador.ExibirMensagem("Chamado cadastrado com sucesso!", ConsoleColor.Green);
         }
-
         public void EditarChamado()
         {
             Console.Clear();
@@ -68,7 +67,6 @@
                     break;
                 }
             }
-
             if (selecionado == null)
             {
                 Notificador.ExibirMensagem("Chamado não encontrado.", ConsoleColor.Red);
@@ -89,7 +87,6 @@
 
             Notificador.ExibirMensagem("Chamado editado com sucesso!", ConsoleColor.Green);
         }
-
         public void ExcluirChamado()
         {
             Console.Clear();
@@ -115,7 +112,6 @@
             else
                 Notificador.ExibirMensagem("Chamado não encontrado.", ConsoleColor.Red);
         }
-
         public void VisualizarChamado(bool exibirCabecalho)
         {
             if (exibirCabecalho)
