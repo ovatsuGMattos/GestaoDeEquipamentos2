@@ -1,33 +1,18 @@
 ﻿namespace GestaoDeEquipamentos2.ConsoleApp
 {
-    public static class Menu
+   public static class Menu
     {
         public static char ApresentarMenuPrincipal()
         {
-            ExibirCabecalho();
-
-            Console.WriteLine("1 - Gerência de Chamados");
-            Console.WriteLine("S - Sair");
-
-            Console.WriteLine();
-
-            Console.Write("Escolha uma das opções: ");
-
-            char opcaoEscolhida = Console.ReadLine()![0];
-
-            return opcaoEscolhida;
-        }
-
-        public static void ExibirCabecalho()
-        {
             Console.Clear();
-
-            Console.WriteLine("----------------------------------------");
-            Console.WriteLine("|        Gestão de Chamados            |");
-            Console.WriteLine("----------------------------------------");
-
-            Console.WriteLine();
+            Console.WriteLine("===== MENU PRINCIPAL =====");
+            Console.WriteLine("1 - Gestão de Chamados");
+            Console.WriteLine("0 - Sair");
+            Console.WriteLine("==========================");
+            Console.Write("Digite a opção desejada: ");
+            return Console.ReadLine()![0];
         }
     }
+
 }
-}
+

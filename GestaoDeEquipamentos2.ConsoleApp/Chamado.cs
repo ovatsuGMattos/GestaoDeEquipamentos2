@@ -4,25 +4,28 @@
     {
         public int Id { get; set; }
         public string TituloChamado { get; set; }
-        public string Descricao {  get; set; }
+        public string Descricao { get; set; }
         public string Equipamento { get; set; }
-        public DateTime DataAbertura {  get; set; }
+        public DateTime DataAbertura { get; set; }
 
+        public int DiasAberto => (DateTime.Now - DataAbertura).Days;
 
-        public Chamado(string tituloChamado, string descricao, string equipamento, DateTime dataAbertura)
+        public Chamado(string titulo, string descricao, string equipamento, DateTime dataAbertura)
         {
-            TituloChamado = tituloChamado;
+            TituloChamado = titulo;
             Descricao = descricao;
             Equipamento = equipamento;
             DataAbertura = dataAbertura;
         }
-        public string ObterNumeroSerie()
+        public void Exibir()
         {
-            string tresPrimeirosCaracteres = TituloChamado.Substring(0, 3).ToUpper();
-
-            return ($"{tresPrimeirosCaracteres}-{Id}");
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine($"ID: {Id}");
+            Console.WriteLine($"Título: {TituloChamado}");
+            Console.WriteLine($"Equipamento: {Equipamento}");
+            Console.WriteLine($"Data de Abertura: {DataAbertura:dd/MM/yyyy}");
+            Console.WriteLine($"Dias em Aberto: {DiasAberto}");
+            Console.WriteLine("---------------------------------------");
         }
-
-
     }
 }

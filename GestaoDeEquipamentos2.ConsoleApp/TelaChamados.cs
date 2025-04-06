@@ -2,101 +2,134 @@
 {
     public class TelaChamados
     {
-        public Chamado[] chamado = new Chamado[100];
-        public int contadorChamado;
+        private Chamado[] chamados = new Chamado[100];
+        private int contadorChamado = 0;
 
         public string ApresentarChamado()
         {
             Console.Clear();
-
             Console.WriteLine("---------------------------------------");
             Console.WriteLine("Gestão de Chamados");
             Console.WriteLine("---------------------------------------");
 
             Console.WriteLine("Escolha opção desejada:");
-            Console.WriteLine("1»Cadastrar novo chamado:");
-            Console.WriteLine("2»Editar chamado:");
-            Console.WriteLine("3»Excluir chamado:");
-            Console.WriteLine("3»Visualizar chamados em aberto: ");
+            Console.WriteLine("1»Cadastrar novo chamado");
+            Console.WriteLine("2»Editar chamado");
+            Console.WriteLine("3»Excluir chamado");
+            Console.WriteLine("4»Visualizar chamados em aberto");
             Console.WriteLine("---------------------------------------");
 
-
-            Console.WriteLine("Digite uma opção válida:");
-            string opcaoEscolhida = Console.ReadLine();
-
-            return opcaoEscolhida;
+            Console.Write("Digite uma opção válida: ");
+            return Console.ReadLine()!;
         }
 
         public void CadastrarChamado()
         {
-            Console.WriteLine("---------------------------------------");
-            Console.WriteLine("Gestão de Chamados");
-            Console.WriteLine("---------------------------------------");
-
-
+            Console.Clear();
             Console.WriteLine("Cadastrar novo chamado");
             Console.WriteLine("---------------------------------------");
 
-            Console.WriteLine("Escreva o título do chamado:");
-            string tituloChamado = Console.ReadLine()!;
+            Console.Write("Título: ");
+            string titulo = Console.ReadLine()!;
 
-            Console.WriteLine("Descreva o chamado");
+            Console.Write("Descrição: ");
             string descricao = Console.ReadLine()!;
 
-            Console.WriteLine("Digite o nome do equipamento:");
+            Console.Write("Equipamento: ");
             string equipamento = Console.ReadLine()!;
 
-            Console.Write("Digite a data de abertura do chamado (dd/MM/yyyy) ");
-            DateTime dataAbertura = Convert.ToDateTime(Console.ReadLine());
+            Console.Write("Data de Abertura (dd/MM/yyyy): ");
+            DateTime data = Convert.ToDateTime(Console.ReadLine());
 
-            Chamado Chamado = new Chamado(tituloChamado, descricao, equipamento, dataAbertura);
-            Chamado.Id = GeradorIds.GerarIdChamados();
+            Chamado novoChamado = new Chamado(titulo, descricao, equipamento, data);
+            novoChamado.Id = GeradorIds.GerarIdChamados();
 
-            chamado[contadorChamado++] = Chamado;
+            chamados[contadorChamado++] = novoChamado;
 
-            Notificador.ExibirMensagem("O chamado foi aberto com sucesso!", ConsoleColor.Green);
+            Notificador.ExibirMensagem("Chamado cadastrado com sucesso!", ConsoleColor.Green);
         }
+
         public void EditarChamado()
         {
-            Console.WriteLine("---------------------------------------");
-            Console.WriteLine("Gestão de Chamados");
-            Console.WriteLine("---------------------------------------");
-
-
-            Console.WriteLine("Editando novo chamado");
-            Console.WriteLine("---------------------------------------");
-
+            Console.Clear();
+            Console.WriteLine("Editar chamado");
             VisualizarChamado(false);
 
-            Console.WriteLine("Digite o ID do chamado que deseja selecionar:");
-            int IdChamados= Convert.ToInt32(Console.ReadLine());
+            Console.Write("ID do chamado: ");
+            int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine();
+            Chamado? selecionado = null;
 
-            Console.WriteLine("Digite o Título do chamado");
-            string tituloChamado = Console.ReadLine()!;
-
-            Console.WriteLine("Descreva o chamado");
-            string descricao = Console.ReadLine()!;
-
-            Console.WriteLine("Digite o nome do equipamento:");
-            string equipamento = Console.ReadLine()!;
-
-            Console.Write("Digite a data de abertura do chamado (dd/MM/yyyy) ");
-            DateTime dataAbertura = Convert.ToDateTime(Console.ReadLine());
-
-            Chamado chamadoEditado = new Chamado(tituloChamado, descricao, equipamento, dataAbertura);
-            Chamado.Id = GeradorIds.GerarIdChamados();
-
-            bool conseguiuEditar = false;
-
-            for (int i = 0; i < chamado.Length ; i++)
+            for (int i = 0; i < chamados.Length; i++)
             {
-                if (Chamado[i] = null) continue;
+                if (chamados[i] != null && chamados[i].Id == idSelecionado)
+                {
+                    selecionado = chamados[i];
+                    break;
+                }
             }
 
+            if (selecionado == null)
+            {
+                Notificador.ExibirMensagem("Chamado não encontrado.", ConsoleColor.Red);
+                return;
+            }
 
+            Console.Write("Novo Título: ");
+            selecionado.TituloChamado = Console.ReadLine()!;
+
+            Console.Write("Nova Descrição: ");
+            selecionado.Descricao = Console.ReadLine()!;
+
+            Console.Write("Novo Equipamento: ");
+            selecionado.Equipamento = Console.ReadLine()!;
+
+            Console.Write("Nova Data de Abertura: ");
+            selecionado.DataAbertura = Convert.ToDateTime(Console.ReadLine()!);
+
+            Notificador.ExibirMensagem("Chamado editado com sucesso!", ConsoleColor.Green);
         }
 
+        public void ExcluirChamado()
+        {
+            Console.Clear();
+            VisualizarChamado(false);
+
+            Console.Write("ID do chamado para excluir: ");
+            int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+            bool encontrado = false;
+
+            for (int i = 0; i < chamados.Length; i++)
+            {
+                if (chamados[i] != null && chamados[i].Id == idSelecionado)
+                {
+                    chamados[i] = null;
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            if (encontrado)
+                Notificador.ExibirMensagem("Chamado excluído com sucesso!", ConsoleColor.Green);
+            else
+                Notificador.ExibirMensagem("Chamado não encontrado.", ConsoleColor.Red);
+        }
+
+        public void VisualizarChamado(bool exibirCabecalho)
+        {
+            if (exibirCabecalho)
+            {
+                Console.Clear();
+                Console.WriteLine("Chamados em Aberto:");
+                Console.WriteLine("---------------------------------------");
+            }
+
+            for (int i = 0; i < chamados.Length; i++)
+            {
+                if (chamados[i] != null)
+                    chamados[i].Exibir();
+            }
+        }
     }
 }
