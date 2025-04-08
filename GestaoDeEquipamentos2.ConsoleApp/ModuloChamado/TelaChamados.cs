@@ -1,4 +1,6 @@
-﻿namespace GestaoDeEquipamentos2.ConsoleApp
+﻿using GestaoDeEquipamentos2.ConsoleApp.Compartilhado;
+
+namespace GestaoDeEquipamentos2.ConsoleApp.ModuloChamado
 {
     public class TelaChamados
     {

@@ -1,6 +1,9 @@
-﻿namespace GestaoDeEquipamentos2.ConsoleApp
+﻿using GestaoDeEquipamentos2.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos2.ConsoleApp.ModuloChamado;
+
+namespace GestaoDeEquipamentos2.ConsoleApp
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
